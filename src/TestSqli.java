@@ -8,6 +8,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 
+
 // some new change
 public class TestSqli {
 
@@ -29,9 +30,11 @@ public class TestSqli {
 
 
 
-    public void make_query(JdbcTemplate jdbcTemplate, String query) throws DataAccessException {
-        // ruleid:spring-sqli
-        jdbcTemplate.execute(query);
+    public void make_query(JdbcTemplate jdbcTemplate, String username) throws DataAccessException {
+        String sql = "SELECT * FROM users WHERE username = ?";
+        jdbcTemplate.query(sql, new Object[]{username}, (rs, rowNum) -> {
+            // Process the result set here
+        });
     }
 
 }
